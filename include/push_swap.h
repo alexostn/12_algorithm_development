@@ -30,6 +30,20 @@ void free_list(t_node *head_a);
 int is_list_sorted(t_node *head);
 int count_nodes(t_node *head);
 void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
+
 void push_to_b(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
+void push_to_a(t_node **head_b, t_node **tail_b, t_node **head_a, t_node **tail_a);
+
+void rotate_a(t_node **head_a, t_node **tail_a);
+void rotate_b(t_node **head_b, t_node **tail_b);
+void rotate_rr(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
+
+void reverse_rotate_a(t_node **head_a, t_node **tail_a);
+void reverse_rotate_b(t_node **head_b, t_node **tail_b);
+void reverse_rotate_rr(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
+
+void sa(t_node **head_a);
+void sb(t_node **head_b);
+void ss(t_node **head_a, t_node **head_b);
 
 #endif

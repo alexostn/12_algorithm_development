@@ -14,34 +14,6 @@ int is_list_sorted(t_node *head)
 	return (1); // Order maintained
 }
 
-// Moves the top element from list A to B
-void push_to_b(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b)
-{
-	(void)tail_a; // Ignoring the parameter
-	if (*head_a == NULL)
-		return; // If list A is empty, do nothing
-
-	t_node *node_to_move = *head_a;
-	*head_a = node_to_move->next; 
-	if (*head_a)
-		(*head_a)->prev = NULL;
-
-	if (*head_b == NULL) // If B is empty
-	{
-		*head_b = node_to_move; 
-		*tail_b = node_to_move;
-		node_to_move->next = NULL;
-		node_to_move->prev = NULL;
-	}
-	else // If B is not empty
-	{
-		(*tail_b)->next = node_to_move; 
-		node_to_move->prev = *tail_b;
-		node_to_move->next = NULL;
-		*tail_b = node_to_move; 
-	}
-}
-
 // Helper function to count the number of nodes in a list
 int count_nodes(t_node *head)
 {
@@ -61,5 +33,23 @@ void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node 
 	{
 		push_to_b(head_a, tail_a, head_b, tail_b); // Move the top element from A to B
 	}
+	// Переместите один элемент из B обратно в A
+	if (*head_b) // Проверяем, есть ли что перемещать
+	{
+		push_to_a(head_b, tail_b, head_a, tail_a); // Move the top element from B to A
+	}
+	// Вызовите функцию rotate_a после перемещения элемента
+	rotate_a(head_a, tail_a); // Поворачиваем стек A
+	rotate_b(head_b, tail_b);
+	rotate_rr(head_a, tail_a, head_b, tail_b);
+
+	reverse_rotate_a(head_a, tail_a);
+	reverse_rotate_b(head_b, tail_b);
+	reverse_rotate_rr(head_a, tail_a, head_b, tail_b);
+
+	sa(head_a);
+	sb(head_b);
+	ss(head_a, head_b);
 }
+
 
