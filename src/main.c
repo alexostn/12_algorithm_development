@@ -52,6 +52,13 @@ int main(int ac, char **av)
 
         // Проверяем количество элементов в списке A
         int element_count = count_elements(head_a);
+		if (element_count == 2) // sa для двух элементов
+		{
+			sa(&head_a);
+            free_list(head_a);
+            free_list(head_b);
+            return (0); // Завершаем программу после сортировки
+		}
         if (element_count == 3)
         {
             sort_three(&head_a, &tail_a); // Вызов функции сортировки для трёх элементов
