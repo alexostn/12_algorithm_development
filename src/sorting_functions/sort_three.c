@@ -1,33 +1,17 @@
 #include "push_swap.h"
 
-// Функция для сортировки трех элементов в стеке A
-void sort_three(t_node **head_a)
+// Определяем функцию, которая обрабатывает случай, когда стек `a` содержит три узла, и сортирует его
+void sort_three(t_node **head_a, t_node **tail_a)
 {
-    if (is_list_sorted(*head_a))
-        return; // Если список уже отсортирован, ничего не делаем
+    t_node *biggest_node; // Указатель на наибольший узел в стеке `a`
 
-    int first = (*head_a)->value;
-    int second = (*head_a)->next->value;
-    int third = (*head_a)->next->next->value;
+    biggest_node = find_max(*head_a); // Найти максимальный узел
+    if (biggest_node == *head_a) // Проверяем, является ли текущий узел наибольшим
+        rotate_a(head_a, tail_a); // Если да, вращаем верхний узел вниз
+    else if ((*head_a)->next == biggest_node) // Проверяем, является ли второй узел наибольшим
+        reverse_rotate_a(head_a, tail_a); // Если да, вращаем нижний узел вверх
 
-    if (first > second && second < third && first < third)
-        sa(head_a); // Сначала меняем местами первые два элемента
-
-    if (first > second && second < third && first > third)
-    {
-        sa(head_a);
-        reverse_rotate_a(head_a, NULL); // Перемещаем последний элемент в начало
-    }
-
-    if (first > second && second > third)
-        rotate_a(head_a, NULL); // Сортируем в порядке третьего, второго, первого
-
-    if (first < second && second > third && first < third)
-        reverse_rotate_a(head_a, NULL); // Перемещаем первый элемент в конец
-
-    if (first < second && second > third && first > third)
-    {
-        sa(head_a);
-        rotate_a(head_a, NULL); // Сортируем в порядке первого, третьего, второго
-    }
+    // Проверяем, если верхний узел больше второго узла
+    if ((*head_a)->value > (*head_a)->next->value) 
+        sa(head_a); // Если да, просто меняем местами верхний и второй узлы
 }

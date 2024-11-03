@@ -30,6 +30,9 @@ void free_list(t_node *head_a);
 // Sorting functions
 int is_list_sorted(t_node *head);
 int count_nodes(t_node *head);
+//Sort_three
+t_node *find_max(t_node *head);
+void sort_three(t_node **head_a, t_node **tail_a);
 void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
 
 void push_to_b(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
