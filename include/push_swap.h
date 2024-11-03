@@ -8,9 +8,10 @@
 
 typedef struct s_node
 {
-	int value;
-	struct s_node *next;
-	struct s_node *prev;
+    int value;
+    struct s_node *next;
+    struct s_node *prev;
+    int closest_smaller; // Новый параметр для хранения наибольшего меньшего значения
 } t_node;
 
 // Parsing functions
@@ -45,5 +46,9 @@ void reverse_rotate_rr(t_node **head_a, t_node **tail_a, t_node **head_b, t_node
 void sa(t_node **head_a);
 void sb(t_node **head_b);
 void ss(t_node **head_a, t_node **head_b);
+
+//LOGICAL SORTING FUNCTIONS
+// Функция для поиска наиболее близкого меньшего значения
+void find_closest_smaller(t_node *head_a, t_node *head_b);
 
 #endif
