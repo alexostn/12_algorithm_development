@@ -85,9 +85,21 @@ void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node 
 		}
 		
 		find_closest_smaller(*head_a, *head_b);
+
+		// Протестируем calculate_steps_to_top для каждого узла в A
+		t_node *current_a = *head_a;
+		while (current_a)
+		{
+			int steps = calculate_steps_to_top(*head_b, current_a->closest_smaller);
+			printf("Node value: %d, Closest Smaller Index: %d, Steps to Top B only: %d\n", 
+				current_a->value, current_a->closest_smaller, steps);
+			current_a = current_a->next;
+		}
+		
 		break; // Exit the loop after moving and comparing
 	}
 }
+
 
 // WRITING EXAMPLES HOW TO USE FUNCTIONS:
 // // Move one element from B back to A
