@@ -3,31 +3,32 @@
 // Moves the top element from list A to B
 void push_to_b(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b)
 {
-	(void)tail_a; // Ignoring the parameter
+	(void)tail_a; // Игнорируем параметр
 	if (*head_a == NULL)
-		return; // If list A is empty, do nothing
+		return; // Если список A пуст, ничего не делаем
 
-	t_node *node_to_move = *head_a;
-	*head_a = node_to_move->next; 
+	t_node *node_to_move = *head_a; // Узел, который будем перемещать
+	*head_a = node_to_move->next; // Обновляем голову стека A
 	if (*head_a)
-		(*head_a)->prev = NULL;
+		(*head_a)->prev = NULL; // Если новая голова не NULL, обнуляем указатель prev
 
-	if (*head_b == NULL) // If B is empty
+	// Добавление в начало списка B
+	node_to_move->next = *head_b; // Устанавливаем указатель next для перемещаемого узла
+	node_to_move->prev = NULL; // Устанавливаем указатель prev в NULL, так как это новая голова стека B
+
+	if (*head_b == NULL) // Если B пуст
 	{
-		*head_b = node_to_move; 
-		*tail_b = node_to_move;
-		node_to_move->next = NULL;
-		node_to_move->prev = NULL;
+		*tail_b = node_to_move; // Устанавливаем tail как node_to_move
 	}
-	else // If B is not empty
+	else // Если B не пуст
 	{
-		(*tail_b)->next = node_to_move; 
-		node_to_move->prev = *tail_b;
-		node_to_move->next = NULL;
-		*tail_b = node_to_move; 
+		(*head_b)->prev = node_to_move; // Устанавливаем prev для текущей головы B
 	}
+	*head_b = node_to_move; // Теперь перемещаемый узел - это новая голова стека B
+
 	write(1, "pb\n", 3);
 }
+
 
 void push_to_a(t_node **head_b, t_node **tail_b, t_node **head_a, t_node **tail_a)
 {

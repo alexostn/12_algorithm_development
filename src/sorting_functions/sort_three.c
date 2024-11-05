@@ -1,17 +1,17 @@
 #include "push_swap.h"
 
-// Определяем функцию, которая обрабатывает случай, когда стек `a` содержит три узла, и сортирует его
+// Define a function that handles the case when stack `a` contains three nodes and sorts it
 void sort_three(t_node **head_a, t_node **tail_a)
 {
-    t_node *biggest_node; // Указатель на наибольший узел в стеке `a`
+    t_node *biggest_node; // Pointer to the largest node in stack `a`
 
-    biggest_node = find_max(*head_a); // Найти максимальный узел
-    if (biggest_node == *head_a) // Проверяем, является ли текущий узел наибольшим
-        rotate_a(head_a, tail_a); // Если да, вращаем верхний узел вниз
-    else if ((*head_a)->next == biggest_node) // Проверяем, является ли второй узел наибольшим
-        reverse_rotate_a(head_a, tail_a); // Если да, вращаем нижний узел вверх
+    biggest_node = find_max(*head_a); // Find the largest node
+    if (biggest_node == *head_a) // Check if the current node is the largest
+        rotate_a(head_a, tail_a); // If so, rotate the top node to the bottom
+    else if ((*head_a)->next == biggest_node) // Check if the second node is the largest
+        reverse_rotate_a(head_a, tail_a); // If so, rotate the bottom node to the top
 
-    // Проверяем, если верхний узел больше второго узла
-    if ((*head_a)->value > (*head_a)->next->value) 
-        sa(head_a); // Если да, просто меняем местами верхний и второй узлы
+    // Check if the top node is greater than the second node
+    if ((*head_a)->value > (*head_a)->next->value)
+        sa(head_a); // If so, simply swap the top and the second nodes
 }

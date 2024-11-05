@@ -70,7 +70,8 @@ int main(int ac, char **av)
 
         if (!is_list_sorted(head_a))
         {
-            move_until_three(&head_a, &tail_a, &head_b, &tail_b);
+            move_until_three(&head_a, &tail_a, &head_b, &tail_b);//1 STEP
+			sort_three(&head_a, &tail_a);						//2 STEP
             // find_closest_smaller(head_a, head_b);
             // Print lists A and B after the operation
             print_list(head_a, "List A");
