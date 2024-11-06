@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <limits.h>
+#include <limits.h> // Don't forget to include this header for INT_MIN
 #include <unistd.h>
 
 typedef struct s_node
@@ -12,6 +12,7 @@ typedef struct s_node
     struct s_node *next;
     struct s_node *prev;
     int closest_smaller; // Новый параметр для хранения наибольшего меньшего значения
+	int closest_bigger;
 	int total_steps;
 } t_node;
 
@@ -35,11 +36,15 @@ int count_nodes(t_node *head);
 //Steps calculation
 int calculate_steps_to_top(t_node *head, int target_index);
 void calculate_total_steps_for_a(t_node *head_a, t_node *head_b);
+void calculate_total_steps_for_b_to_a(t_node *head_a, t_node *head_b);
+
 int find_min_steps_node(t_node *head_a);
 
 //Sort_three
 t_node *find_max(t_node *head);
+void bring_max_to_top(t_node **head_b, t_node **tail_b);
 void sort_three(t_node **head_a, t_node **tail_a);
+void sort_three_descending(t_node **head_b, t_node **tail_b);
 void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
 
 void push_to_b(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b);
@@ -60,5 +65,8 @@ void ss(t_node **head_a, t_node **head_b);
 //LOGICAL SORTING FUNCTIONS
 // Функция для поиска наиболее близкого меньшего значения
 void find_closest_smaller(t_node *head_a, t_node *head_b);
-
+int get_node_value_by_index(t_node *head, int index);
+void find_closest_bigger(t_node *head_a, t_node *head_b);
+// Функция для поиска наиболее близкого большего значения
+// void find_closest_bigger(t_node *head_a, t_node *head_b); 
 #endif

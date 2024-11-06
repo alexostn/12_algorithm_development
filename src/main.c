@@ -10,11 +10,16 @@ void print_list(t_node *head, const char *list_name)
     ft_putstr_fd(":\n", 1);
     while (current)
     {
-        printf("Node %d: Value = %d, Closest Smaller Node %d\n", index++, current->value, current->closest_smaller);
+        // Печатаем информацию о значении узла и ближайшем большем значении
+        printf("Node %d: Value = %d, Closest Bigger Node = %d\n", 
+               index++, 
+               current->value, 
+               current->closest_bigger);
         current = current->next;
     }
     ft_putstr_fd("\n", 1);
 }
+
 
 int count_elements(t_node *head)
 {
@@ -73,6 +78,8 @@ int main(int ac, char **av)
             move_until_three(&head_a, &tail_a, &head_b, &tail_b);//1 STEP
 			sort_three(&head_a, &tail_a);						//2 STEP
             // find_closest_smaller(head_a, head_b);
+			find_closest_bigger(head_a, head_b);				//3 STEP
+			calculate_total_steps_for_b_to_a(head_a, head_b);
             // Print lists A and B after the operation
             print_list(head_a, "List A");
             print_list(head_b, "List B");

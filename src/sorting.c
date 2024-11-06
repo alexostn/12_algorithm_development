@@ -27,7 +27,6 @@ int count_nodes(t_node *head)
 }
 
 // Function to find the index of the node with the closest smaller value
-#include <limits.h> // Don't forget to include this header for INT_MIN
 
 void find_closest_smaller(t_node *head_a, t_node *head_b)
 {
@@ -71,8 +70,6 @@ void find_closest_smaller(t_node *head_a, t_node *head_b)
 	}
 }
 
-
-
 // Example usage in move_until_three function
 void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node **tail_b)
 {
@@ -82,6 +79,7 @@ void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node 
             push_to_b(head_a, tail_a, head_b, tail_b);
             // Переместить второй элемент в B
             push_to_b(head_a, tail_a, head_b, tail_b);
+			bring_max_to_top(head_b, tail_b);
         }
     while (count_nodes(*head_a) > 3) // Продолжать, пока в A не останется три узла
     {
@@ -89,8 +87,8 @@ void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node 
 
         // Расчет и вывод общего количества шагов для каждого узла в A с учетом B
         calculate_total_steps_for_a(*head_a, *head_b);
-        int min_steps_index = find_min_steps_node(*head_a);
-        printf("Node in stack A with the minimum total steps is at index: %d\n", min_steps_index);
+        int min_steps_index = find_min_steps_node(*head_a);//here we find min sters node
+        // printf("Node in stack A with the minimum total steps is at index: %d\n", min_steps_index);
         
         // Перемещение узла с минимальным количеством шагов в B
         t_node *current_a = *head_a;
@@ -100,16 +98,21 @@ void move_until_three(t_node **head_a, t_node **tail_a, t_node **head_b, t_node 
         {
             if (current_index == min_steps_index)
             {
+			if (count_nodes(*head_b) == 3)
+				sort_three_descending(head_b, tail_b);
+			bring_max_to_top(head_b, tail_b);
                 // Переместить узел с минимальными шагами в B
 			push_to_b(head_a, tail_a, head_b, tail_b);
-			//ATEMPT TO SORT B BEFORE PUSH 4TH ELEMENT
-			if ((count_nodes(*head_b) == 3)&&(*head_b && (*head_b)->value < (*tail_b)->value))
-				reverse_rotate_b(head_b, tail_b);
+			// //ATEMPT TO SORT B BEFORE PUSH 4TH ELEMENT
+			
 			// break; // Выход из цикла после перемещения
             }
             current_a = current_a->next;
             current_index++;
         }
+		if ((*head_b)->value < (*tail_b)->value)//ДОЛГООЖИДАЕМЫЙ ROTATE БЕЗ КОТОРОГО ВОЗМОЖНО ОБОЙТИСЬ
+			rotate_b(head_b, tail_b);
+
 
         // break; // Выйти из цикла после перемещения и сравнения
     }
